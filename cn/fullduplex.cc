@@ -6,39 +6,47 @@
 #include "ns3/netanim-module.h"
 
 using namespace ns3;
-
-NS_LOG_COMPONENT_DEFINE("FSE");
+NS_LOG_COMPONENT_DEFINE("FirstScriptExample");
 
 int main(int argc, char *argv[]) {
-    Time::SetResolution(Time::NS);
-    LogComponentEnable("UdpEchoClientApplication", LOG_LEVEL_INFO);
-    LogComponentEnable("UdpEchoServerApplication", LOG_LEVEL_INFO);
+  Time::SetResolution(Time::NS);
 
-    NodeContainer n;
-    n.Create(2);
+  NodeContainer nodes; 
+  nodes.Create(2);
 
-    PointToPointHelper p2p;
-    p2p.SetDeviceAttribute("DataRate", StringValue("10Mbps"));
-    p2p.SetChannelAttribute("Delay", StringValue("2ms"));
+  PointToPointHelper p2p; 
+  p2p.SetDeviceAttribute("DataRate", StringValue("10Mbps")); 
+  p2p.SetChannelAttribute("Delay", StringValue("2ms"));
 
-    NetDeviceContainer d = p2p.Install(n);
-    InternetStackHelper().Install(n);
+  InternetStackHelper stack; 
+  stack.Install(nodes);
+  NetDeviceContainer devices = p2p.Install(nodes);
 
-    Ipv4InterfaceContainer i = Ipv4AddressHelper("10.1.1.0", "255.255.255.0").Assign(d);
+  Ipv4AddressHelper address; 
+  address.SetBase("10.1.1.0", "255.255.255.0"); 
+  Ipv4InterfaceContainer interfaces = address.Assign(devices);
 
-    UdpEchoServerHelper(9).Install(n.Get(1)).Start(Seconds(1.0)).Stop(Seconds(10.0));
+  UdpEchoServerHelper echoServer(9); 
+  ApplicationContainer serverApps = echoServer.Install(nodes.Get(1)); 
+  serverApps.Start(Seconds(1.0)); 
+  serverApps.Stop(Seconds(10.0));
 
-    UdpEchoClientHelper(i.GetAddress(1), 9).SetAttribute("MaxPackets", UintegerValue(4))
-        .SetAttribute("Interval", TimeValue(Seconds(1.0))).SetAttribute("PacketSize", UintegerValue(1024))
-        .Install(n.Get(0)).Start(Seconds(2.0)).Stop(Seconds(10.0));
+  UdpEchoClientHelper echoClient(interfaces.GetAddress(1), 9); 
+  echoClient.SetAttribute("MaxPackets", UintegerValue(4)); 
+  echoClient.SetAttribute("Interval", TimeValue(Seconds(1.0))); 
+  echoClient.SetAttribute("PacketSize", UintegerValue(1024));
 
-    AnimationInterface("1.xml").SetConstantPosition(n.Get(0), 10.0, 10.0).SetConstantPosition(n.Get(1), 20.0, 30.0);
+  ApplicationContainer clientApps = echoClient.Install(nodes.Get(0)); 
+  clientApps.Start(Seconds(2.0)); 
+  clientApps.Stop(Seconds(10.0));
 
-    if (true) PointToPointHelper().EnablePcapAll("p2p");
+  AnimationInterface anim("1.xml"); 
+  anim.SetConstantPosition(nodes.Get(0), 10.0, 10.0); 
+  anim.SetConstantPosition(nodes.Get(1), 20.0, 30.0);
 
-    Simulator::Run();
-    Simulator::Destroy();
+  if (true) PointToPointHelper().EnablePcapAll("p2p");
 
-    return 0;
+  Simulator::Run(); Simulator::Destroy();
+
+  return 0;
 }
-
