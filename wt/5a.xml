@@ -1,0 +1,9 @@
+<?xml version = "1.0"?>
+<?xml-stylesheet type="text/css" href="5a.css" ?>
+<RU>
+ <b> Books </b><br />
+ <e> Electronics </e><br />
+ <s> Stationaries </s><br />
+ <c> Cloths</c><br />
+ <o> other </o><br />
+</RU>

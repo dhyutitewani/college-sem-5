@@ -1,0 +1,27 @@
+CATALOG 
+{ 
+background-color: #ffffff; 
+width: 100%; 
+} 
+STUDENT
+{ 
+    display: block; 
+    margin-bottom: 30pt; 
+    margin-left: 0; 
+    } 
+    NAME
+    { 
+    color: #FF0000; 
+    font-size: 20pt; 
+    } 
+    SRN
+    { 
+    color: #0000FF; 
+    font-size: 20pt; 
+    } 
+    BRANCH,SEMESTER,UNIVERSITY,COUNTRY 
+    { 
+    display: block; 
+    color: #000000; 
+    margin-left: 20pt; 
+}

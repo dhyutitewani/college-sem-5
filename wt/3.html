@@ -1,0 +1,25 @@
+<html>
+<head>
+<title>Enter the Details</title>
+<script>
+function validate() 
+{
+var srn = document.getElementById("srn_check").value;
+if (srn.search(/^[A-Z a-z]+[0-9]+[0-9]+[A-Z a-z]+[A-Z a-z]+[0-9]+[0-9]+[0-9]+$/) == -1 || srn.length != 8) 
+{
+document.write("Invalid SRN............!!!!!Enter the SRN properly");
+return;
+}
+document.write("Success");
+}
+</script>
+</head>
+<body>
+<h1>Please enter the following field</h1>
+<form>
+<labeL>Enter SRN: </label>
+<input type="text" id="srn_check" /><br /><hr />
+<input type="submit" value="Check" onclick="validate()" />
+</form>
+</body>
+</html>
