@@ -7,7 +7,7 @@ from sklearn.preprocessing import StandardScaler as ss
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix as cm
 
-data_set = pd.read_csv('data.csv')
+data_set = pd.read_csv('user_data.csv')
 
 x= data_set.iloc[:, [2,3]].values 
 y= data_set.iloc[:, 4].values
