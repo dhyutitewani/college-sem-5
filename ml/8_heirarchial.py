@@ -3,7 +3,7 @@ import pandas as pd
 import scipy.cluster.hierarchy as shc
 from sklearn.cluster import AgglomerativeClustering
 
-data = pd.read_csv('data.csv')
+data = pd.read_csv('mall_customer_data.csv')
 
 x = data.iloc[:, [3,4]]
 
