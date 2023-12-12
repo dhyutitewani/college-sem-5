@@ -7,7 +7,7 @@ from sklearn.decomposition import PCA
 from sklearn.linear_model import LogisticRegression as lr
 from sklearn.metrics import confusion_matrix as cm
 
-data = pd.read_csv('data.csv')
+data = pd.read_csv('wine.csv')
 
 x = data.iloc[:, 0:13].values
 y = data.iloc[:, 13].values
