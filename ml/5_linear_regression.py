@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split as t_t
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import confusion_matrix as cm
 
-data = pd.read_csv('data.csv')
+data = pd.read_csv('salary_data.csv')
 
 x = data.iloc[:, :-1].values
 y = data.iloc[:, 1].values
