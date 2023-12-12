@@ -7,7 +7,7 @@ from sklearn.preprocessing import StandardScaler as ss
 from sklearn.neighbors import KNeighborsClassifier as knn
 from sklearn.metrics import confusion_matrix as cm
 
-data = pd.read_csv('data.csv')
+data = pd.read_csv('user_data.csv')
 
 x = data.iloc[:, [2,3]].values
 y = data.iloc[:, 4].values
