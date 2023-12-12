@@ -2,7 +2,7 @@ import matplotlib.pyplot as mtp
 import pandas as pd
 from sklearn.cluster import KMeans
 
-data_set = pd.read_csv('data.csv')
+data_set = pd.read_csv('mall_customer_data.csv')
 
 x = data_set.iloc[:,[3,4]].values
 
